@@ -1,17 +1,67 @@
 package com.example.xiang.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class MainActivity extends ActionBarActivity {
+    private List<Map<String, Object>> mData;
+    private MainListAdapter mAdapter;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mData = init();
+//        mData = init_text();
+        mAdapter = new MainListAdapter(getApplicationContext(), mData);
+        mListView = (ListView) findViewById(R.id.listView_main);
+        mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = null;
+                intent = new Intent(MainActivity.this, (Class) mData.get(position).get("class"));
+                startActivity(intent);
+            }
+        });
+    }
+
+    private List<Map<String, Object>> init() {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("title", "1");
+        map.put("img", R.drawable.fresco_logo);
+        map.put("text", R.string.about_fresco);
+        map.put("class", FrescoActivity.class);
+        list.add(map);
+
+        return list;
+    }
+
+    private List<Map<String, Object>> init_text() {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        Map<String, Object> map;
+        for (int i = 0; i < 1000; i++) {
+            map = new HashMap<String, Object>();
+            map.put("title", "1");
+            map.put("img", R.drawable.fresco_logo);
+            map.put("text", R.string.about_fresco);
+            list.add(map);
+        }
+        return list;
     }
 
 

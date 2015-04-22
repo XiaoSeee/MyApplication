@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">我的应用</string>
+
+    <string name="hello_world">你好!</string>
+    <string name="action_settings">设置</string>
+    <string name="about_fresco">Fresco 是一个强大的图片加载组件。</string>
+</resources>
