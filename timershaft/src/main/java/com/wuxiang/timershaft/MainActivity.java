@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 /**
  * Created by Xiang on 2015/8/21.
+ * 首界面
  */
 public class MainActivity extends Activity {
     @Override
