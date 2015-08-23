@@ -1,8 +1,6 @@
 <resources>
 
-    <style name="AppTheme.Base" parent="Theme.AppCompat">
-        <item name="windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- 如果有Action Bar，则为其颜色-->
         <item name="colorPrimary">@color/app_theme</item>
         <!-- 系统状态栏颜色-->
@@ -11,6 +9,13 @@
     </style>
 
     <style name="AppTheme" parent="AppTheme.Base">
+    </style>
 
+    <style name="MyMainTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/MyMainTextAppearance</item>
+    </style>
+
+    <style name="MyMainTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
     </style>
 </resources>
