@@ -2,10 +2,11 @@ package com.wuxiang.timershaft.activity;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.wuxiang.timershaft.R;
 import com.wuxiang.timershaft.adapter.MainPagerAdapter;
@@ -34,24 +35,42 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     private void initTab() {
         mViewPager = findView(R.id.main_pager);
-        PagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager(), mContext);
-        mViewPager.setAdapter(adapter);
-
         mTopTable = findView(R.id.main_tab);
+
+        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager(), mContext);
+        mViewPager.setAdapter(adapter);
         mTopTable.setupWithViewPager(mViewPager);
 
-//        mTopTable.removeAllTabs();
-//        mTopTable.addTab(mTopTable.newTab().setIcon(R.mipmap.ic_alarm_black));
-//        mTopTable.addTab(mTopTable.newTab().setIcon(R.mipmap.ic_alarm_black));
-//        mTopTable.addTab(mTopTable.newTab().setIcon(R.mipmap.ic_alarm_black));
-//        mTopTable.addTab(mTopTable.newTab().setIcon(R.mipmap.ic_alarm_black));
 
+        mTopTable.removeAllTabs();
+        mTopTable.addTab(mTopTable.newTab().setIcon(R.drawable.tab_alarm_ic));
+        mTopTable.addTab(mTopTable.newTab().setIcon(R.drawable.tab_alarm_ic));
+        mTopTable.addTab(mTopTable.newTab().setIcon(R.drawable.tab_alarm_ic));
+        mTopTable.addTab(mTopTable.newTab().setIcon(R.drawable.tab_alarm_ic));
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                String tabTitles[] = new String[]{"Tab1", "Tab2", "Tab3", "Tab4"};
+                setTitle(tabTitles[position]);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
 
     private void initToolBar() {
         mToolbar = findView(R.id.main_toolbar);
-        mToolbar.setTitle(R.string.app_name);
+        setTitle(getString(R.string.app_name));
         mToolbar.inflateMenu(R.menu.main_menu);
         mToolbar.setOnMenuItemClickListener(this);
 

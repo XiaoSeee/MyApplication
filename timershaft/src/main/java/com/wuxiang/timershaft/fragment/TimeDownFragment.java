@@ -17,15 +17,15 @@ import java.util.HashMap;
  * Created by Lizixuan on 2015/8/23.
  * 时钟+闹钟界面
  */
-public class AlarmFragment extends Fragment {
+public class TimeDownFragment extends Fragment {
 
     public static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
 
-    public static AlarmFragment newInstance(int page) {
+    public static TimeDownFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
-        AlarmFragment fragment = new AlarmFragment();
+        TimeDownFragment fragment = new TimeDownFragment();
         fragment.setArguments(args);
         return fragment;
     }
