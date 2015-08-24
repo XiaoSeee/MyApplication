@@ -8,12 +8,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
-import android.view.View;
 
 import com.wuxiang.timershaft.R;
 import com.wuxiang.timershaft.fragment.AlarmFragment;
-
-import java.util.List;
 
 /**
  * Created by Lizixuan on 2015/8/23.
@@ -36,20 +33,15 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public CharSequence getPageTitle(int position) {
+        return tabTitles[position];
+    }
+
+    @Override
     public int getCount() {
         return PAGE_COUNT;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-//        return tabTitles[position];
-        Drawable image = context.getResources().getDrawable(imageResId[position]);
-        image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
-        SpannableString sb = new SpannableString(" ");
-        ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BASELINE);
-        sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return sb;
-    }
 
     @Override
     public Fragment getItem(int position) {

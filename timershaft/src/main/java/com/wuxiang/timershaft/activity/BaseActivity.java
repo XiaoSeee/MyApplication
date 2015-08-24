@@ -14,23 +14,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
     }
 
-    /**
-     * 查找view
-     */
     protected <T extends View> T findView(int id) {
         return (T) findViewById(id);
     }
 
-    /**
-     * 加载布局
-     *
-     * @return
-     */
     protected abstract int getContentView();
-
-    /**
-     * 初始化view
-     */
+    
     protected abstract void initView();
 
 }

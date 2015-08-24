@@ -40,6 +40,12 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         mTopTable = findView(R.id.main_tab);
         mTopTable.setupWithViewPager(mViewPager);
 
+//        mTopTable.removeAllTabs();
+//        mTopTable.addTab(mTopTable.newTab().setIcon(R.mipmap.ic_alarm_black));
+//        mTopTable.addTab(mTopTable.newTab().setIcon(R.mipmap.ic_alarm_black));
+//        mTopTable.addTab(mTopTable.newTab().setIcon(R.mipmap.ic_alarm_black));
+//        mTopTable.addTab(mTopTable.newTab().setIcon(R.mipmap.ic_alarm_black));
+
     }
 
 
