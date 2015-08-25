@@ -1,24 +1,13 @@
 <resources>
+    <!-- 主界面字符串-->
     <string name="app_name">时间轴</string>
     <string name="add">添加</string>
-    <string name="test">Timer ShaftTimer ShaftTimer ShaftTimer Sha
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ShaftTimer ShaftTimer ShaftTimer ShafShaftTimer ShaftTimer ShaftTimer Shaf
-        ftTimer ShaftTimer ShaftTimer ShaftTimer ShaftTimer ShaftTimer Shaft
-    </string>
+    <string-array name="title_list">
+        <item>闹钟</item>
+        <item>计时</item>
+        <item>倒时</item>
+        <item>设置</item>
+    </string-array>
+
+    <!-- 时间闹钟界面字符串-->
 </resources>

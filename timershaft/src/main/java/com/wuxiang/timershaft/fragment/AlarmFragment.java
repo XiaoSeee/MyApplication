@@ -2,6 +2,8 @@ package com.wuxiang.timershaft.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.wuxiang.timershaft.R;
+import com.wuxiang.timershaft.adapter.AlarmRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,26 +42,12 @@ public class AlarmFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.item, container, false);
+        View view = inflater.inflate(R.layout.alarm_fragment_layout, container, false);
 
-        ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
-        for (int i = 0; i < 30; i++) {
-            HashMap<String, String> map = new HashMap<String, String>();
-            map.put("ItemTitle", "This is Title....." + mPage);
-            map.put("ItemText", "This is text....." + mPage);
-            mylist.add(map);
-        }
-        ListView listView = (ListView) view.findViewById(R.id.alarm_list);
-        SimpleAdapter adapter = new SimpleAdapter(getActivity(), //没什么解释
-                mylist,//数据来源
-                R.layout.my_listitem,//ListItem的XML实现
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.alarm_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(new AlarmRecyclerAdapter());
 
-                //动态数组与ListItem对应的子项
-                new String[]{"ItemTitle", "ItemText"},
-
-                //ListItem的XML文件里面的两个TextView ID
-                new int[]{R.id.ItemTitle, R.id.ItemText});
-        listView.setAdapter(adapter);
         return view;
     }
 }

@@ -24,13 +24,14 @@ import java.util.List;
  * 4.设置界面
  */
 public class MainPagerAdapter extends FragmentStatePagerAdapter {
-    final int PAGE_COUNT = 4;
-    private String tabTitles[] = new String[]{"Tab1", "Tab2", "Tab3", "Tab4"};
+    private String[] tabTitles;
     private Context context;
 
     public MainPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
+
+        tabTitles = context.getResources().getStringArray(R.array.title_list);
 
     }
 
@@ -41,14 +42,18 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return PAGE_COUNT;
+        return tabTitles.length;
     }
 
 
     @Override
     public Fragment getItem(int position) {
+        if (position == 0) {
+            return AlarmFragment.newInstance(position + 1);
+        } else {
+            return TimeDownFragment.newInstance(position + 1);
+        }
 
-        return AlarmFragment.newInstance(position + 1);
 
     }
 

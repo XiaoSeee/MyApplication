@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.wuxiang.timershaft.R;
 import com.wuxiang.timershaft.adapter.MainPagerAdapter;
+import com.wuxiang.timershaft.util.Utils;
+
+import java.util.List;
 
 /**
  * Created by Xiang on 2015/8/21.
@@ -20,6 +23,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     private ViewPager mViewPager;
     private Toolbar mToolbar;
     public Context mContext;
+    private String[] mTitleList;
 
     @Override
     protected int getContentView() {
@@ -29,6 +33,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     @Override
     protected void initView() {
         mContext = getApplicationContext();
+        mTitleList = getResources().getStringArray(R.array.title_list);
         initToolBar();
         initTab();
     }
@@ -51,13 +56,11 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
             public void onPageSelected(int position) {
-                String tabTitles[] = new String[]{"Tab1", "Tab2", "Tab3", "Tab4"};
-                setTitle(tabTitles[position]);
+                onPageChange(position);
             }
 
             @Override
@@ -67,10 +70,19 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         });
     }
 
+    private void onPageChange(int position) {
+        setTitle(mTitleList[position]);
+        if (position == 3) {
+            mToolbar.getMenu().getItem(0).setVisible(false);
+        } else {
+            mToolbar.getMenu().getItem(0).setVisible(true);
+        }
+    }
+
 
     private void initToolBar() {
         mToolbar = findView(R.id.main_toolbar);
-        setTitle(getString(R.string.app_name));
+        setTitle(mTitleList[0]);
         mToolbar.inflateMenu(R.menu.main_menu);
         mToolbar.setOnMenuItemClickListener(this);
 

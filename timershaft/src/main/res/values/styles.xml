@@ -8,14 +8,5 @@
         <item name="android:windowBackground">@color/app_theme</item>
     </style>
 
-    <style name="AppTheme" parent="AppTheme.Base">
-    </style>
-
-    <style name="MyMainTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabTextAppearance">@style/MyMainTextAppearance</item>
-    </style>
-
-    <style name="MyMainTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="textAllCaps">false</item>
-    </style>
+    <style name="AppTheme" parent="AppTheme.Base" />
 </resources>
