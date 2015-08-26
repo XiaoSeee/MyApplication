@@ -13,7 +13,9 @@ import com.wuxiang.timershaft.R;
  * 第一页布局
  */
 public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdapter.ViewHolder> {
-    public String[] datas = {"wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang", "wuxiang"};
+
+    private static int COUNT = 15;
+    private static String TEXT = "This is the item for ";
 
     public AlarmRecyclerAdapter() {
     }
@@ -21,7 +23,7 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     //创建新View，被LayoutManager所调用
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.alarm_item_card, viewGroup, false);
         ViewHolder vh = new ViewHolder(view);
         return vh;
     }
@@ -29,13 +31,13 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.mTextView.setText(datas[position]);
+        viewHolder.mTextView.setText(TEXT + position);
     }
 
     //获取数据的数量
     @Override
     public int getItemCount() {
-        return datas.length;
+        return COUNT;
     }
 
     //自定义的ViewHolder，持有每个Item的的所有界面元素
@@ -44,7 +46,7 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
         public ViewHolder(View view) {
             super(view);
-            mTextView = (TextView) view.findViewById(R.id.text);
+            mTextView = (TextView) view.findViewById(R.id.text_view);
         }
     }
 }

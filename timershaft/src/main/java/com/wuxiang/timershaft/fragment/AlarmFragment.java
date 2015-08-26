@@ -1,5 +1,6 @@
 package com.wuxiang.timershaft.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,14 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.wuxiang.timershaft.R;
 import com.wuxiang.timershaft.adapter.AlarmRecyclerAdapter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.wuxiang.timershaft.adapter.LinkItemDecoration;
 
 /**
  * Created by Lizixuan on 2015/8/23.
@@ -47,6 +44,8 @@ public class AlarmFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.alarm_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new AlarmRecyclerAdapter());
+        Drawable drawable = getResources().getDrawable(R.mipmap.abc_list_longpressed_holo);
+        recyclerView.addItemDecoration(new LinkItemDecoration(drawable, getActivity()));
 
         return view;
     }
