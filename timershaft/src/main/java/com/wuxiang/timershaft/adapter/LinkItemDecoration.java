@@ -12,14 +12,11 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.wuxiang.timershaft.R;
-import com.wuxiang.timershaft.util.Utils;
 
 public class LinkItemDecoration extends RecyclerView.ItemDecoration {
 
     private Context mContext;
     private Drawable mDivider;
-    private boolean mShowFirstDivider = true;
-    private boolean mShowLastDivider = false;
 
 
     public LinkItemDecoration(Context context, AttributeSet attrs) {
@@ -30,24 +27,12 @@ public class LinkItemDecoration extends RecyclerView.ItemDecoration {
         this.mContext = context;
     }
 
-    public LinkItemDecoration(Context context, AttributeSet attrs, boolean showFirstDivider,
-                              boolean showLastDivider) {
-        this(context, attrs);
-        mShowFirstDivider = showFirstDivider;
-        mShowLastDivider = showLastDivider;
-    }
 
     public LinkItemDecoration(Drawable divider, Context context) {
         this.mContext = context;
         this.mDivider = divider;
     }
 
-    public LinkItemDecoration(Drawable divider, Context context, boolean showFirstDivider,
-                              boolean showLastDivider) {
-        this(divider, context);
-        mShowFirstDivider = showFirstDivider;
-        mShowLastDivider = showLastDivider;
-    }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
@@ -77,51 +62,32 @@ public class LinkItemDecoration extends RecyclerView.ItemDecoration {
         }
 
         // 初始化画布的大小
-        int left = 0, right = 0, top = 0, bottom = 0, size;
+        int left = 0, right = 0, top = 0, bottom = 0;
         int orientation = getOrientation(parent);
         int childCount = parent.getChildCount();
-
+        int count = parent.getAdapter().getItemCount();
 
         if (orientation == LinearLayoutManager.VERTICAL) {
-            size = mDivider.getIntrinsicHeight();
-            left = parent.getPaddingLeft() + (int) mContext.getResources().getDimension(R.dimen.link_line_padding_left);
+            left = parent.getPaddingLeft() + (int) mContext.getResources().getDimension(R.dimen.link_line_padding);
             right = left + mDivider.getIntrinsicWidth();
         } else { //horizontal
-            size = mDivider.getIntrinsicWidth();
-            top = parent.getPaddingTop() + parent.getHeight() / 2;
+            top = parent.getPaddingTop() + (int) mContext.getResources().getDimension(R.dimen.link_line_padding);
             bottom = top + mDivider.getIntrinsicHeight();
         }
 
-        for (int i = mShowFirstDivider ? 0 : 1; i < childCount - 3; i++) {
+        for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
+            //最后一个Item不画线
+            int theItem = parent.getChildAdapterPosition(child);
+            if (theItem == count - 1) continue;
 
-            int the = parent.getChildAdapterPosition(child);
-            Utils.showLogE("绘制第几个item的线：" + the);
-            if (the == 0) continue;
-
-            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
             if (orientation == LinearLayoutManager.VERTICAL) {
-                top = child.getTop() - params.topMargin - 50;
-                bottom = top + size * 5;
+                top = child.getBottom() - (int) mContext.getResources().getDimension(R.dimen.link_line_top);
+                bottom = child.getBottom() + (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
             } else { //horizontal
-                left = child.getLeft() - params.leftMargin;
-                right = left + size;
-            }
-            mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(c);
-        }
-
-        // show last divider
-        if (mShowLastDivider && childCount > 0) {
-            View child = parent.getChildAt(childCount - 1);
-            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-            if (orientation == LinearLayoutManager.VERTICAL) {
-                top = child.getBottom() + params.bottomMargin;
-                bottom = top + size;
-            } else { // horizontal
-                left = child.getRight() + params.rightMargin;
-                right = left + size;
+                left = child.getRight() - (int) mContext.getResources().getDimension(R.dimen.link_line_top);
+                right = child.getRight() + (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
             }
             mDivider.setBounds(left, top, right, bottom);
             mDivider.draw(c);

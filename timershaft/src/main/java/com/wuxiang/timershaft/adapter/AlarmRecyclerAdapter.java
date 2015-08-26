@@ -14,7 +14,7 @@ import com.wuxiang.timershaft.R;
  */
 public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdapter.ViewHolder> {
 
-    private static int COUNT = 15;
+    private int mCount = 15;
     private static String TEXT = "This is the item for ";
 
     public AlarmRecyclerAdapter() {
@@ -24,7 +24,7 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.alarm_item_card, viewGroup, false);
-        ViewHolder vh = new ViewHolder(view);
+        ViewHolder vh = new ViewHolder(view, this);
         return vh;
     }
 
@@ -37,16 +37,38 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     //获取数据的数量
     @Override
     public int getItemCount() {
-        return COUNT;
+        return mCount;
+    }
+
+    public void addTitle() {
+        mCount++;
+        notifyItemInserted(1);
+    }
+
+    public void remove(int position) {
+        mCount--;
+        notifyItemRemoved(position);
     }
 
     //自定义的ViewHolder，持有每个Item的的所有界面元素
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTextView;
+        public AlarmRecyclerAdapter mAdapter;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, AlarmRecyclerAdapter adapter) {
             super(view);
             mTextView = (TextView) view.findViewById(R.id.text_view);
+            mAdapter = adapter;
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (getAdapterPosition() == 2) {
+                        mAdapter.remove(2);
+                    } else {
+                        mAdapter.addTitle();
+                    }
+                }
+            });
         }
     }
 }

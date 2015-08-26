@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="item_margin">10dp</dimen>
-    <dimen name="link_line_padding_left">30dp</dimen>
+    <dimen name="link_line_padding">50dp</dimen>
+    <dimen name="link_line_top">10dp</dimen>
+    <dimen name="link_line_bottom">30dp</dimen>
 </resources>
