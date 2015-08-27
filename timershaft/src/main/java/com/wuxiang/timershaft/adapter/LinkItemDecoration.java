@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -78,14 +79,24 @@ public class LinkItemDecoration extends RecyclerView.ItemDecoration {
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
             int theItem = parent.getChildAdapterPosition(child);
+            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
+                    .getLayoutParams();
+            //两个Item之间的垂直间距
+            final int vMargin = params.topMargin + params.bottomMargin;
+            //两个Item之间的水平间距
+            final int hMargin = params.leftMargin + params.leftMargin;
 
             if (i == 0 && theItem != 0) {
                 if (orientation == LinearLayoutManager.VERTICAL) {
-                    top = child.getTop() - (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
-                    bottom = child.getTop() + (int) mContext.getResources().getDimension(R.dimen.link_line_top);
+                    top = child.getTop() + Math.round(ViewCompat.getTranslationY(child))
+                            - vMargin - (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                    bottom = child.getTop() + Math.round(ViewCompat.getTranslationY(child))
+                            + (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
                 } else { //horizontal
-                    left = child.getLeft() - (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
-                    right = child.getLeft() + (int) mContext.getResources().getDimension(R.dimen.link_line_top);
+                    left = child.getLeft() + Math.round(ViewCompat.getTranslationX(child))
+                            - hMargin - (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                    right = child.getLeft() + Math.round(ViewCompat.getTranslationX(child))
+                            + (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
                 }
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
@@ -93,11 +104,15 @@ public class LinkItemDecoration extends RecyclerView.ItemDecoration {
 
             if (theItem != count - 1) {//最后一个Item不画线
                 if (orientation == LinearLayoutManager.VERTICAL) {
-                    top = child.getBottom() - (int) mContext.getResources().getDimension(R.dimen.link_line_top);
-                    bottom = child.getBottom() + (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
+                    top = child.getBottom() + Math.round(ViewCompat.getTranslationY(child))
+                            - (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                    bottom = child.getBottom() + Math.round(ViewCompat.getTranslationY(child))
+                            + vMargin + (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
                 } else { //horizontal
-                    left = child.getRight() - (int) mContext.getResources().getDimension(R.dimen.link_line_top);
-                    right = child.getRight() + (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
+                    left = child.getRight() + Math.round(ViewCompat.getTranslationX(child))
+                            - (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                    right = child.getRight() + Math.round(ViewCompat.getTranslationX(child))
+                            + hMargin + (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
                 }
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
