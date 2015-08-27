@@ -77,20 +77,31 @@ public class LinkItemDecoration extends RecyclerView.ItemDecoration {
 
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
-            //最后一个Item不画线
             int theItem = parent.getChildAdapterPosition(child);
-            if (theItem == count - 1) continue;
 
-
-            if (orientation == LinearLayoutManager.VERTICAL) {
-                top = child.getBottom() - (int) mContext.getResources().getDimension(R.dimen.link_line_top);
-                bottom = child.getBottom() + (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
-            } else { //horizontal
-                left = child.getRight() - (int) mContext.getResources().getDimension(R.dimen.link_line_top);
-                right = child.getRight() + (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
+            if (i == 0 && theItem != 0) {
+                if (orientation == LinearLayoutManager.VERTICAL) {
+                    top = child.getTop() - (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
+                    bottom = child.getTop() + (int) mContext.getResources().getDimension(R.dimen.link_line_top);
+                } else { //horizontal
+                    left = child.getLeft() - (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
+                    right = child.getLeft() + (int) mContext.getResources().getDimension(R.dimen.link_line_top);
+                }
+                mDivider.setBounds(left, top, right, bottom);
+                mDivider.draw(c);
             }
-            mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(c);
+
+            if (theItem != count - 1) {//最后一个Item不画线
+                if (orientation == LinearLayoutManager.VERTICAL) {
+                    top = child.getBottom() - (int) mContext.getResources().getDimension(R.dimen.link_line_top);
+                    bottom = child.getBottom() + (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
+                } else { //horizontal
+                    left = child.getRight() - (int) mContext.getResources().getDimension(R.dimen.link_line_top);
+                    right = child.getRight() + (int) mContext.getResources().getDimension(R.dimen.link_line_bottom);
+                }
+                mDivider.setBounds(left, top, right, bottom);
+                mDivider.draw(c);
+            }
         }
     }
 

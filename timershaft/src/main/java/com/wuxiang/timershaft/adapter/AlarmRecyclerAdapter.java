@@ -15,7 +15,7 @@ import com.wuxiang.timershaft.R;
 public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdapter.ViewHolder> {
 
     private int mCount = 15;
-    private static String TEXT = "This is the item for ";
+    private static String TEXT = "Click  the item to ";
 
     public AlarmRecyclerAdapter() {
     }
@@ -31,7 +31,12 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.mTextView.setText(TEXT + position);
+        if (position == 2) {
+            viewHolder.mTextView.setText(TEXT + "remove " + position);
+        } else {
+            viewHolder.mTextView.setText(TEXT + "add " + position);
+        }
+
     }
 
     //获取数据的数量
