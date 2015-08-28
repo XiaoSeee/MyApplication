@@ -55,6 +55,10 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
         notifyItemRemoved(position);
     }
 
+    public void move(int from, int to) {
+        notifyItemMoved(from, to);
+    }
+
     //自定义的ViewHolder，持有每个Item的的所有界面元素
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTextView;
@@ -68,7 +72,8 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
                 @Override
                 public void onClick(View v) {
                     if (getAdapterPosition() == 2) {
-                        mAdapter.remove(2);
+//                        mAdapter.remove(2);
+                        mAdapter.move(2, 0);
                     } else {
                         mAdapter.addTitle();
                     }
