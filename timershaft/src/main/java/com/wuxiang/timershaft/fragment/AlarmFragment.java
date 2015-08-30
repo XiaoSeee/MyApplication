@@ -45,7 +45,7 @@ public class AlarmFragment extends Fragment {
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 //        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new AlarmRecyclerAdapter());
+        recyclerView.setAdapter(new AlarmRecyclerAdapter(getActivity()));
         recyclerView.getItemAnimator().setSupportsChangeAnimations(true);
         Drawable drawable = getResources().getDrawable(R.mipmap.abc_list_longpressed_holo);
         recyclerView.addItemDecoration(new LinkItemDecoration(drawable, getActivity()));

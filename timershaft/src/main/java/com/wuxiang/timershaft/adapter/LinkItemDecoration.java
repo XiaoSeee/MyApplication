@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.wuxiang.timershaft.R;
+import com.wuxiang.timershaft.util.Utils;
 
 public class LinkItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -64,15 +65,17 @@ public class LinkItemDecoration extends RecyclerView.ItemDecoration {
 
         // 初始化画布的大小
         int left = 0, right = 0, top = 0, bottom = 0;
-        int orientation = getOrientation(parent);
-        int childCount = parent.getChildCount();
-        int count = parent.getAdapter().getItemCount();
+        final int orientation = getOrientation(parent);
+        final int childCount = parent.getChildCount();
+        final int count = parent.getAdapter().getItemCount();
+        final int padding = (int) mContext.getResources().getDimension(R.dimen.link_line_padding);
+        final int insert = (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
 
         if (orientation == LinearLayoutManager.VERTICAL) {
-            left = parent.getPaddingLeft() + (int) mContext.getResources().getDimension(R.dimen.link_line_padding);
+            left = parent.getPaddingLeft() + padding;
             right = left + mDivider.getIntrinsicWidth();
         } else { //horizontal
-            top = parent.getPaddingTop() + (int) mContext.getResources().getDimension(R.dimen.link_line_padding);
+            top = parent.getPaddingTop() + padding;
             bottom = top + mDivider.getIntrinsicHeight();
         }
 
@@ -89,14 +92,14 @@ public class LinkItemDecoration extends RecyclerView.ItemDecoration {
             if (i == 0 && theItem != 0) {
                 if (orientation == LinearLayoutManager.VERTICAL) {
                     top = child.getTop() + Math.round(ViewCompat.getTranslationY(child))
-                            - vMargin - (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                            - vMargin - insert;
                     bottom = child.getTop() + Math.round(ViewCompat.getTranslationY(child))
-                            + (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                            + insert;
                 } else { //horizontal
                     left = child.getLeft() + Math.round(ViewCompat.getTranslationX(child))
-                            - hMargin - (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                            - hMargin - insert;
                     right = child.getLeft() + Math.round(ViewCompat.getTranslationX(child))
-                            + (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                            + insert;
                 }
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
@@ -105,14 +108,14 @@ public class LinkItemDecoration extends RecyclerView.ItemDecoration {
             if (theItem != count - 1) {//最后一个Item不画线
                 if (orientation == LinearLayoutManager.VERTICAL) {
                     top = child.getBottom() + Math.round(ViewCompat.getTranslationY(child))
-                            - (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                            - insert;
                     bottom = child.getBottom() + Math.round(ViewCompat.getTranslationY(child))
-                            + vMargin + (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                            + vMargin + insert;
                 } else { //horizontal
                     left = child.getRight() + Math.round(ViewCompat.getTranslationX(child))
-                            - (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                            - insert;
                     right = child.getRight() + Math.round(ViewCompat.getTranslationX(child))
-                            + hMargin + (int) mContext.getResources().getDimension(R.dimen.link_line_insert);
+                            + hMargin + insert;
                 }
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);

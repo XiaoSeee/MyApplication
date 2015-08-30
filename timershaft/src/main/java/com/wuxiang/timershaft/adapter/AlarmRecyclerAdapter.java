@@ -1,5 +1,6 @@
 package com.wuxiang.timershaft.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wuxiang.timershaft.R;
+import com.wuxiang.timershaft.util.Utils;
 
 /**
  * Created by Lizixuan on 2015/8/23.
@@ -16,8 +18,10 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
     private int mCount = 15;
     private static String TEXT = "Click  the item to ";
+    private Context mContext;
 
-    public AlarmRecyclerAdapter() {
+    public AlarmRecyclerAdapter(Context context) {
+        this.mContext = context;
     }
 
     //创建新View，被LayoutManager所调用
@@ -46,11 +50,13 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     }
 
     public void addTitle() {
+        Utils.showToast(mContext, "添加一个Item");
         mCount++;
         notifyItemInserted(1);
     }
 
     public void remove(int position) {
+        Utils.showToast(mContext, "删除一个Item");
         mCount--;
         notifyItemRemoved(position);
     }
@@ -72,8 +78,8 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
                 @Override
                 public void onClick(View v) {
                     if (getAdapterPosition() == 2) {
-//                        mAdapter.remove(2);
-                        mAdapter.move(2, 0);
+                        mAdapter.remove(2);
+//                        mAdapter.move(2, 0);
                     } else {
                         mAdapter.addTitle();
                     }

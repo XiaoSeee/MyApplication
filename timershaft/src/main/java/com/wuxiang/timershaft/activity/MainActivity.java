@@ -92,6 +92,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.main_toolbar_add:
+                Utils.showToast(this, "添加");
                 break;
             default:
                 break;
