@@ -14,11 +14,14 @@ import com.wuxiang.timershaft.util.Utils;
  * Created by Lizixuan on 2015/8/23.
  * 第一页布局
  */
-public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdapter.ViewHolder> {
+public class AlarmRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private int mCount = 15;
     private static String TEXT = "Click  the item to ";
     private Context mContext;
+
+    private static final int ITEM_TYPE_TIME = 0;
+    private static final int ITEM_TYPE_ALARM = 1;
 
     public AlarmRecyclerAdapter(Context context) {
         this.mContext = context;
@@ -26,21 +29,31 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
     //创建新View，被LayoutManager所调用
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.alarm_item_card, viewGroup, false);
-        ViewHolder vh = new ViewHolder(view, this);
-        return vh;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        if (viewType == ITEM_TYPE_TIME) {
+            return new TimeViewHolder(LayoutInflater.from(mContext).inflate(R.layout.time_item_card, viewGroup, false), this);
+        } else {
+            return new AlarmViewHolder(LayoutInflater.from(mContext).inflate(R.layout.alarm_item_card, viewGroup, false), this);
+        }
     }
 
-    //将数据与界面进行绑定的操作
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        if (position == 2) {
-            viewHolder.mTextView.setText(TEXT + "remove " + position);
-        } else {
-            viewHolder.mTextView.setText(TEXT + "add " + position);
-        }
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        final int viewType = getItemViewType(position);
+        if (viewType == ITEM_TYPE_TIME) {
 
+        } else {
+            ((AlarmViewHolder) holder).mTextView.setText(TEXT);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return ITEM_TYPE_TIME;
+        } else {
+            return ITEM_TYPE_ALARM;
+        }
     }
 
     //获取数据的数量
@@ -66,11 +79,11 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     }
 
     //自定义的ViewHolder，持有每个Item的的所有界面元素
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class AlarmViewHolder extends RecyclerView.ViewHolder {
         public TextView mTextView;
         public AlarmRecyclerAdapter mAdapter;
 
-        public ViewHolder(View view, AlarmRecyclerAdapter adapter) {
+        public AlarmViewHolder(View view, AlarmRecyclerAdapter adapter) {
             super(view);
             mTextView = (TextView) view.findViewById(R.id.text_view);
             mAdapter = adapter;
@@ -85,6 +98,15 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
                     }
                 }
             });
+        }
+    }
+
+    public static class TimeViewHolder extends RecyclerView.ViewHolder {
+        public TextView mTextView;
+        public AlarmRecyclerAdapter mAdapter;
+
+        public TimeViewHolder(View view, AlarmRecyclerAdapter adapter) {
+            super(view);
         }
     }
 }
