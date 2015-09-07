@@ -1,6 +1,6 @@
 <resources>
     <!-- 主界面字符串-->
-    <string name="app_name">时间轴</string>
+    <string name="app_name">时间管家</string>
     <string name="add">添加</string>
     <string-array name="title_list">
         <item>闹钟</item>
