@@ -8,5 +8,5 @@
         <item name="android:windowBackground">@color/app_theme</item>
     </style>
 
-    <style name="AppTheme" parent="AppTheme.Base" />
+    <style name="AppTheme" parent="AppTheme.Base"/>
 </resources>
