@@ -17,8 +17,8 @@ import android.view.ViewDebug;
 import android.widget.TextView;
 
 import com.wuxiang.timershaft.R;
+import com.wuxiang.timershaft.util.Utils;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -72,6 +72,7 @@ public class TextClock extends TextView {
         public void run() {
             onTimeChanged();
 
+            Utils.showLogE("mTicker.run");
             long now = SystemClock.uptimeMillis();
             long next = now + (1000 - now % 1000);
 
